@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<div style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 24px; padding: 24px;">
+				<div class="card">
+					<div class="card-header">
+						<i class="fa fa-user"></i> Register new admin
+					</div>
+					<div class="card-block" style="padding: 24px;">
+						 <form th:action="@{/register/admin}" method="post">
+			                <div class="form-group">
+			                    <label for="Username">Username</label>
+			                    <input type="text" class="form-control" id="Username"
+			                           name="username">
+			                </div>
+			               <div class="form-group">
+			                    <label for="Password">Password</label>
+			                    <input type="password" class="form-control" id="Password" name="password">
+			                </div>
+			                <div class="form-group">
+			                </div>
+			                <button type="submit" class="btn btn-primary">Submit</button>
+			            </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

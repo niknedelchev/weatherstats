@@ -1,0 +1,56 @@
+.index-services h2 {
+	text-align: center;
+} 
+
+.img-thumbnail{
+	width: 200px;
+    height: 200px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+
+.thumbnail{
+	width:200px;
+	margin:2px;
+}
+
+#about {
+	min-height: 600px;
+	text-align: justify;
+}
+
+.about-img {
+	max-width:400px;	
+}
+
+.bg-light{
+	/*background-color: rgba(8, 185, 212, 0.1) !important;*/
+	background-color: rgba(12, 145, 166, 0.1) !important;
+}
+
+a {
+    color: #428BCA;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #2A6496;
+    text-decoration: underline;
+}
+
+.frame {
+	min-height: 700px;
+}
+
+footer {
+	min-height: 200px;
+}
+
+#highlighted{
+	background: whitesmoke;
+}

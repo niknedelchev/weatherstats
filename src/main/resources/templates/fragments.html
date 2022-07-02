@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title>Weather Stats App</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/custom.css" />
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"
+		th:fragment="navbar">
+
+		<a class="navbar-brand" title="начална страница" th:href="@{/}"> WSA
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarTogglerDemo02"
+			aria-controls="navbarTogglerDemo02" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item"><a
+					class="nav-link text-info font-weight-bold"
+					title="начална страница" th:href="@{/}">Начало</a></li>
+				<li class="nav-item"><a
+					class="nav-link text-info font-weight-bold" title="за нас"
+					th:href="@{/about}">За нас</a></li>
+			</ul>
+			<ul class="navbar-nav my-2 my-lg-0">
+				<li class="nav-item"><a sec:authorize="hasRole('ROLE_ADMIN')"
+					class="btn btn-outline-success mr-sm-2 my-2 my-sm-0"
+					title="администраторски панел" th:href="@{/admin/admin-panel}">Админ
+						панел</a></li>
+				<li class="nav-item"><a sec:authorize="isAuthenticated()"
+					class="btn btn-outline-danger mr-sm-2 my-2 my-sm-0" title="изход"
+					th:href="@{/logout}">Изход </a></li>
+				<li class="nav-item"><a sec:authorize="isAnonymous()"
+					th:href="@{/register}" title="регистрация"
+					class="btn btn-outline-success mr-sm-2 my-2 my-sm-0">Регистрация
+				</a></li>
+				<li class="nav-item"><a sec:authorize="isAnonymous()"
+					th:href="@{/login}" title="вход"
+					class="btn btn-outline-success mr-sm-2 my-2 my-sm-0">Вход </a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<th:block th:fragment="footer">
+		<hr style="margin: 0px; background-color: #428BCA;">
+		<footer class="container-fluid bg-light" th:fragment="footer">
+			<div class="row">
+					Wheather stats app
+			</div>
+		</footer>
+
+
+		<script src="/js/jquery-3.6.0.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script>
+			$('.carousel').carousel({
+				interval : 2000
+			})
+		</script>
+	</th:block>
+
+</body>
+
+</html>

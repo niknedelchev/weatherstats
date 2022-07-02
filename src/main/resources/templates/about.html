@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+
+		<div id="about" class="container frame py-5">
+			<div class="row">
+				<div class="col-sm-12 col-md-8">
+					<h2 class="text-info text-center mt-3	">Wheather stats app</h2>
+					<br>
+
+				</div>
+			</div>
+		</div>
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

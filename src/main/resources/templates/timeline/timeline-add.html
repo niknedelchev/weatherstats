@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Timeline - add</h2>
+			<br>
+			<form action="#" th:action="@{/timeline/add}"
+				th:object="${timeline}" th:method="post" class="w-50">
+				
+				<label for="Station" class="text-info font-weight-bold">Station</label>
+				<select id="Station" class="form-control " th:field="*{station}">
+					<option th:each="station : ${stations}" th:value="${station.id}" th:text="${station.name}"></option>
+				</select>
+				
+				<label for="Period" class="text-info font-weight-bold">Period</label>
+				<input type="month" id="Period" class="form-control" min="1990-01" th:field="*{period}">
+				<br>
+				
+				<label for="AvgTemperature" class="text-info font-weight-bold">Average temperature</label>
+				<input type="text" id="AvgTemperature" class="form-control" th:field="*{avgTemperature}" />
+				<br>
+				<label for="AvgSnow" class="text-info font-weight-bold">Average snow</label>
+				<input type="text" id="AvgSnow" class="form-control" th:field="*{avgSnow}" />
+				<br>
+				<label for="TotRain" class="text-info font-weight-bold">Total rain</label>
+				<input type="text" id="TotRain" class="form-control" th:field="*{totRain}" />
+				<br>
+				<label for="TotSunshine" class="text-info font-weight-bold">Total sunshine</label>
+				<input type="text" id="TotSunshine" class="form-control" th:field="*{totSunshine}" />
+				<br>
+				<label for="ExtrMaxTemp" class="text-info font-weight-bold">Extreme max temperature</label>
+				<input type="text" id="ExtrMaxTemp" class="form-control" th:field="*{extrMaxTemp}" />
+				<br>
+				<label for="ExtrMinTemp" class="text-info font-weight-bold">Extreme min temperature</label>
+				<input type="text" id="ExtrMinTemp" class="form-control" th:field="*{extrMinTemp}" />
+				<br>
+				<label for="ExtrAvgTemp" class="text-info font-weight-bold">Extreme average temperature</label>
+				<input type="text" id="ExtrAvgTemp" class="form-control" th:field="*{extrAvgTemp}" />
+				<br>
+
+				<p>
+					<input type="submit" class="btn btn-info" value="Submit" />
+				</p>
+	
+			</form>
+
+		</section>
+
+
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

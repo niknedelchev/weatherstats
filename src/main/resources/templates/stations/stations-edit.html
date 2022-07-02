@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Edit</h2>
+			<br>
+
+			<form action="#" th:action="@{/stations/edit/{id}(id=${station.id})}"
+				th:object="${station}" th:method="post" class="w-50">
+				
+				<label for="Name" class="text-info font-weight-bold">Name</label>
+				<input type="text" id="Name" class="form-control" th:field="*{name}" />
+				<br>
+				
+				<label for="validFrom" class="text-info font-weight-bold">Valid from:</label>
+				<input type="month" id="validFrom" class="form-control" min="1990-01" th:field="*{validFrom}">
+				<br>
+			
+			 	<label for="validTo" class="text-info font-weight-bold">Valid to:</label>
+				<input type="month" id="validTo" class="form-control" min="1990-01" th:field="*{validTo}">
+				<br>
+			
+				<label for="stationId" class="text-info font-weight-bold">Name</label>
+				<input type="hidden" id="stationId" class="form-control" th:field="*{id}" />
+				<br>
+	
+				<p>
+					<input type="submit" class="btn btn-info" value="Submit" />
+				</p>
+	
+			</form>
+
+		</section>
+
+
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
