@@ -7,20 +7,20 @@
 <body>
 	<main>
 		<section class="container py-5 frame">
-			<h2 class="text-center text-info">Station - add</h2>
+			<h2 class="text-center text-info">Добавяне на станция</h2>
 			<br>
 			<form action="#" th:action="@{/stations/add}"
 				th:object="${station}" th:method="post" class="w-50">
 				
-				<label for="Name" class="text-info font-weight-bold">Name</label>
+				<label for="Name" class="text-info font-weight-bold">Име</label>
 				<input type="text" id="Name" class="form-control" th:field="*{name}" />
 				<br>
 				
-				<label for="validFrom" class="text-info font-weight-bold">Valid from:</label>
+				<label for="validFrom" class="text-info font-weight-bold">Валидност от:</label>
 				<input type="month" id="validFrom" class="form-control" min="1990-01" th:field="*{validFrom}">
 				<br>
 			
-			 	<label for="validTo" class="text-info font-weight-bold">Valid to:</label>
+			 	<label for="validTo" class="text-info font-weight-bold">Валидност до:</label>
 				<input type="month" id="validTo" class="form-control" min="1990-01" th:field="*{validTo}">
 				<br>
 	

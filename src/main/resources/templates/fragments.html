@@ -14,8 +14,8 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light"
 		th:fragment="navbar">
 
-		<a class="navbar-brand" title="начална страница" th:href="@{/}"> WSA
-		</a>
+		<a class="navbar-brand" title="начална страница" th:href="@{/}">
+			WSA </a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarTogglerDemo02"
 			aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -31,12 +31,23 @@
 				<li class="nav-item"><a
 					class="nav-link text-info font-weight-bold" title="за нас"
 					th:href="@{/about}">За нас</a></li>
+				<li class="nav-item"><a
+					class="nav-link text-info font-weight-bold" title="времеви редове"
+					sec:authorize="isAuthenticated()" th:href="@{/timeline}">Данни</a></li>
+				<li class="nav-item"><a sec:authorize="isAuthenticated()"
+					class="nav-link text-info font-weight-bold" title="времеви редове"
+					th:href="@{/stations}">Станции</a></li>
+				<li class="nav-item"><a
+					class="nav-link text-info font-weight-bold" title="времеви редове"
+					sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{/timeline/scraping}">Скрейпинг</a></li>
 			</ul>
+
 			<ul class="navbar-nav my-2 my-lg-0">
 				<li class="nav-item"><a sec:authorize="hasRole('ROLE_ADMIN')"
 					class="btn btn-outline-success mr-sm-2 my-2 my-sm-0"
-					title="администраторски панел" th:href="@{/admin/admin-panel}">Админ
-						панел</a></li>
+					title="регистрация на админи" th:href="@{/register/admin}">Регистрация
+						на админ</a></li>
 				<li class="nav-item"><a sec:authorize="isAuthenticated()"
 					class="btn btn-outline-danger mr-sm-2 my-2 my-sm-0" title="изход"
 					th:href="@{/logout}">Изход </a></li>
@@ -54,19 +65,12 @@
 	<th:block th:fragment="footer">
 		<hr style="margin: 0px; background-color: #428BCA;">
 		<footer class="container-fluid bg-light" th:fragment="footer">
-			<div class="row">
-					Wheather stats app
-			</div>
+			<div class="row">Wheather stats app</div>
 		</footer>
-
 
 		<script src="/js/jquery-3.6.0.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
-		<script>
-			$('.carousel').carousel({
-				interval : 2000
-			})
-		</script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 	</th:block>
 
 </body>

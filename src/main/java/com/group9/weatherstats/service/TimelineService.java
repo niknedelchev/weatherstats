@@ -119,7 +119,10 @@ public class TimelineService {
 
 	public void delete(Timeline timeline) {
 		timelineRepository.delete(timeline);
+	}
 
+	public void deleteAll() {
+		timelineRepository.deleteAll();
 	}
 
 	public void readTimelinesFromCSV(MultipartFile file) throws IllegalStateException, IOException {
@@ -152,10 +155,7 @@ public class TimelineService {
 		}
 	}
 
-	public List<TimelineWeightedAvgDTO> getTimelineWAvgDTOs(String from, String to) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate startDate = LocalDate.parse(from, formatter);
-		LocalDate endDate = LocalDate.parse(to, formatter);
+	public List<TimelineWeightedAvgDTO> getTimelineWAvgDTOs(LocalDate startDate, LocalDate endDate) {
 		List<Timeline> timelines = this.timelineRepository.findByPeriodBetween(startDate, endDate);
 
 		// get all unique periods

@@ -293,21 +293,14 @@ public class WebScrapingService {
     //[Мес. сл. греене]/totSunshine -> https://www.stringmeteo.com/synop/sunsh_month.php?month=3&year=2000 -> sunsh_month е разликата
     //[Мес. екстр.]/extrMaxTemp, extrMinTemp, extrAvgTemp -> https://www.stringmeteo.com/synop/maxmin_month.php?month=3&year=2000 -> maxmin_month e разликата
 
-    public static void ScrapeTimelines(StationService stationService, TimelineService timelineService){
+    public static void ScrapeTimelines(StationService stationService, TimelineService timelineService, int fromYear, int toYear, int fromMonth, int toMonth){
 
-        List<Station> stations = new ArrayList<>();
-        
-
- //       stations.add(stationService.findById(1));
-//        stations.add(stationService.findById(2));
- //       stations.add(stationService.findById(3));
-        stations.add(stationService.findById(4));
-        stations.add(stationService.findById(5));
-// 
+    	List<Station> stations = stationService.findAll();
+    	
         List<Timeline> timelines = new ArrayList<>();
 
-        for (int year = 2021; year <= 2022; year++){
-            for (int month = 1; month <= 12; month++){
+        for (int year = fromYear; year <= toYear; year++){
+            for (int month = fromMonth; month <= toMonth; month++){
 
                 //Има данни до 6-ти месец (юни), 2022 г.
                 if(year == 2022 && month == 7){
@@ -318,8 +311,6 @@ public class WebScrapingService {
                     Timeline timeline1;
                     timeline1 = Scraping(station, year, month);
 
-                    System.out.println(timeline1);
-                    
                     timelineService.save(timeline1);
                 }
             }

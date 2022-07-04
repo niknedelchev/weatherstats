@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +50,26 @@ public class TimelineController {
 	WebScrapingService webScrapingService;
 
 	@GetMapping(path = "/timeline")
-	public String showStationsPage(Model model) {
-		List<Timeline> timelines = timelineService.findAll();
+	public String showStationsPage(Model model, @RequestParam(required = false) String from, @RequestParam(required = false) String to) {
+		List<Timeline> timelines; 
+		
+		if (from != null && to != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+			
+			YearMonth startPeriod = YearMonth.parse(from, formatter);
+			YearMonth endPeriod = YearMonth.parse(to, formatter);
+			
+			LocalDate startDate = startPeriod.atDay(1);
+			LocalDate endDate = endPeriod.atEndOfMonth();
+			
+			timelines = timelineService.findByPeriodBetween(startDate, endDate);
+		} 
+		else 
+		{
+			timelines = timelineService.findAll();
+		}
+		
+		
 		model.addAttribute("timelines", timelines);
 		return "/timeline/timeline";
 	}
@@ -97,9 +116,28 @@ public class TimelineController {
 
 	@GetMapping(path = "/do-scraping")
 	public String doScraping() {
-		webScrapingService.ScrapeTimelines(stationService, timelineService);
+		webScrapingService.ScrapeTimelines(stationService, timelineService, 2020, 2022, 1, 12);
 		return "redirect:/timeline";
 	}
+
+	@GetMapping(path = "timeline/scraping")
+	public String showScrapingPage() {
+		return "timeline/scraping";
+	}
+	
+	//to be finished
+	@PostMapping(path = "timeline/scraping")
+	public String doScrapingFromTo(@RequestParam String from, @RequestParam String to) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		
+		YearMonth startPeriod = YearMonth.parse(from, formatter);
+		YearMonth endPeriod = YearMonth.parse(to, formatter);
+		
+		webScrapingService.ScrapeTimelines(stationService, timelineService, startPeriod.getYear(), endPeriod.getYear(), startPeriod.getMonthValue(), endPeriod.getMonthValue());
+		
+		return "redirect:/timeline";
+	}
+
 
 	@GetMapping(path = "/timeline/upload-csv")
 	public String timlineCSVUploader() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
@@ -151,15 +189,29 @@ public class TimelineController {
 	
 	@GetMapping(path = "/timeline/weighted-average")
 	public String timelineWeightedAveragePage(Model model, @RequestParam String from, @RequestParam String to) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+	
+		YearMonth startPeriod = YearMonth.parse(from, formatter);
+		YearMonth endPeriod = YearMonth.parse(to, formatter);
+		
+		LocalDate startDate = startPeriod.atDay(1);
+		LocalDate endDate = endPeriod.atEndOfMonth();
+		
 		model.addAttribute("startDate", from);
 		model.addAttribute("endDate", to);
 		
-		List<TimelineWeightedAvgDTO> timelinesWAvgDTOs = timelineService.getTimelineWAvgDTOs(from,to);
+		
+		List<TimelineWeightedAvgDTO> timelinesWAvgDTOs = timelineService.getTimelineWAvgDTOs(startDate,endDate);
 		model.addAttribute("timelines", timelinesWAvgDTOs);
 		
 		return "timeline/weighted-average";
 	}
 
-
+	@GetMapping(path = "/timeline/delete-all")
+	public String deleteAllTimelines() {
+		timelineService.deleteAll();
+		return "redirect:/timeline";
+	}
+	
 
 }

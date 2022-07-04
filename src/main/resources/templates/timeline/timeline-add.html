@@ -7,44 +7,44 @@
 <body>
 	<main>
 		<section class="container py-5 frame">
-			<h2 class="text-center text-info">Timeline - add</h2>
+			<h2 class="text-center text-info">Добави времеви ред</h2>
 			<br>
 			<form action="#" th:action="@{/timeline/add}"
 				th:object="${timeline}" th:method="post" class="w-50">
 				
-				<label for="Station" class="text-info font-weight-bold">Station</label>
+				<label for="Station" class="text-info font-weight-bold">Станция</label>
 				<select id="Station" class="form-control " th:field="*{station}">
 					<option th:each="station : ${stations}" th:value="${station.id}" th:text="${station.name}"></option>
 				</select>
 				
-				<label for="Period" class="text-info font-weight-bold">Period</label>
+				<label for="Period" class="text-info font-weight-bold">Период</label>
 				<input type="month" id="Period" class="form-control" min="1990-01" th:field="*{period}">
 				<br>
 				
-				<label for="AvgTemperature" class="text-info font-weight-bold">Average temperature</label>
+				<label for="AvgTemperature" class="text-info font-weight-bold">Средна температура</label>
 				<input type="text" id="AvgTemperature" class="form-control" th:field="*{avgTemperature}" />
 				<br>
-				<label for="AvgSnow" class="text-info font-weight-bold">Average snow</label>
+				<label for="AvgSnow" class="text-info font-weight-bold">Средна снежна покривка</label>
 				<input type="text" id="AvgSnow" class="form-control" th:field="*{avgSnow}" />
 				<br>
-				<label for="TotRain" class="text-info font-weight-bold">Total rain</label>
+				<label for="TotRain" class="text-info font-weight-bold">Общо количество дъжд</label>
 				<input type="text" id="TotRain" class="form-control" th:field="*{totRain}" />
 				<br>
-				<label for="TotSunshine" class="text-info font-weight-bold">Total sunshine</label>
+				<label for="TotSunshine" class="text-info font-weight-bold">Общо слънцегреене</label>
 				<input type="text" id="TotSunshine" class="form-control" th:field="*{totSunshine}" />
 				<br>
-				<label for="ExtrMaxTemp" class="text-info font-weight-bold">Extreme max temperature</label>
+				<label for="ExtrMaxTemp" class="text-info font-weight-bold">Екстремна максимална температура</label>
 				<input type="text" id="ExtrMaxTemp" class="form-control" th:field="*{extrMaxTemp}" />
 				<br>
-				<label for="ExtrMinTemp" class="text-info font-weight-bold">Extreme min temperature</label>
+				<label for="ExtrMinTemp" class="text-info font-weight-bold">Екстремна минимална температура</label>
 				<input type="text" id="ExtrMinTemp" class="form-control" th:field="*{extrMinTemp}" />
 				<br>
-				<label for="ExtrAvgTemp" class="text-info font-weight-bold">Extreme average temperature</label>
+				<label for="ExtrAvgTemp" class="text-info font-weight-bold">Екстремна средна температура</label>
 				<input type="text" id="ExtrAvgTemp" class="form-control" th:field="*{extrAvgTemp}" />
 				<br>
 
 				<p>
-					<input type="submit" class="btn btn-info" value="Submit" />
+					<input type="submit" class="btn btn-info" value="Предай" />
 				</p>
 	
 			</form>

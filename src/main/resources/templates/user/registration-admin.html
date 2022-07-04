@@ -7,26 +7,34 @@
 <body>
 	<main>
 		<div class="container general-list-view">
-			<div style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 24px; padding: 24px;">
+			<div
+				style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 24px; padding: 24px;">
 				<div class="card">
 					<div class="card-header">
-						<i class="fa fa-user"></i> Register new admin
+						<i class="fa fa-user"></i> Регистрация на административен потребител
 					</div>
 					<div class="card-block" style="padding: 24px;">
-						 <form th:action="@{/register/admin}" method="post">
-			                <div class="form-group">
-			                    <label for="Username">Username</label>
-			                    <input type="text" class="form-control" id="Username"
-			                           name="username">
-			                </div>
-			               <div class="form-group">
-			                    <label for="Password">Password</label>
-			                    <input type="password" class="form-control" id="Password" name="password">
-			                </div>
-			                <div class="form-group">
-			                </div>
-			                <button type="submit" class="btn btn-primary">Submit</button>
-			            </form>
+						<form th:action="@{/register/admin}" method="post">
+							<div class="form-group">
+								<label for="FirstName" class="text-info">Име</label> <input
+									type="text" class="form-control" id="FirstName"
+									name="firstName">
+							</div>
+							<div class="form-group">
+								<label for="LastName" class="text-info">Фамииля</label> <input
+									type="text" class="form-control" id="LastName" name="lastName">
+							</div>
+							<div class="form-group">
+								<label for="Username">Потребителско име</label> <input type="text"
+									class="form-control" id="Username" name="username">
+							</div>
+							<div class="form-group">
+								<label for="Password">Парола</label> <input type="password"
+									class="form-control" id="Password" name="password">
+							</div>
+							<div class="form-group"></div>
+							<button type="submit" class="btn btn-primary">Предай</button>
+						</form>
 					</div>
 				</div>
 			</div>

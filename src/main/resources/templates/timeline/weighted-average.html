@@ -7,44 +7,98 @@
 <body>
 	<main>
 		<section class="container py-5 frame">
-			<h2 class="text-center text-info">Timeline - weighted average</h2>
+			<h2 class="text-center text-info">Времеви редове -
+				среднопретеглени стойности</h2>
 			<br>
 			<h3 class="row">
-				<p class="col">From:</p>
+				<p class="col">От:</p>
 				<p class="col" th:text="${startDate}" />
-				<p class="col">To:</p>
+				<p class="col">До:</p>
 				<p class="col" th:text="${endDate}" />
 			</h3>
 			<br>
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col">Period</th>
-						<th scope="col">Average temperature</th>
-						<th scope="col">Average snow</th>
-						<th scope="col">Total rain</th>
-						<th scope="col">Total sunshine</th>
-						<th scope="col">Extreme max temperature</th>
-						<th scope="col">Extreme min temperature</th>
-						<th scope="col">Extreme avg temperature</th>
+						<th scope="col">Период</th>
+						<th scope="col">Ср.темп.</th>
+						<th scope="col">Ср.снж. покр.</th>
+						<th scope="col">Общо к. дъжд</th>
+						<th scope="col">Общо слънцегреене</th>
+						<th scope="col">Екстр. макс. темп.</th>
+						<th scope="col">Екстр. мин. темп.</th>
+						<th scope="col">Екстр. ср. темп.</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="timeline : ${timelines}">
 						<td
 							th:text="${timeline.period.getMonth().getValue() +'-'+ timeline.period.getYear()}"></td>
-						<td th:text="${timeline.avgTemperature}"></td>
-						<td th:text="${timeline.avgSnow}"></td>
-						<td th:text="${timeline.totRain}"></td>
-						<td th:text="${timeline.totSunshine}"></td>
-						<td th:text="${timeline.extrMaxTemp}"></td>
-						<td th:text="${timeline.extrMinTemp}"></td>
-						<td th:text="${timeline.extrAvgTemp}"></td>
+						<td
+							th:text="${#numbers.formatDecimal(timeline.avgTemperature,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.avgSnow,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.totRain,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.totSunshine,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.extrMaxTemp,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.extrMinTemp,1,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(timeline.extrAvgTemp,1,2)}"></td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
+		<section class="container frame">
+			<div>
+				<canvas id="avgTempChart"></canvas>
+			</div>
+		</section>
 	</main>
 	<th:block th:replace="fragments :: footer" />
+	
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+  const labels = [ ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Средна температура',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [],
+    }]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+</script>
+
+<script>
+  const avgTempChart = new Chart(
+    document.getElementById('avgTempChart'),
+    config
+  );
+</script>
+<script>
+	var oTable = document.getElementsByClassName("table");
+	var rowLength = oTable[0].rows.length;
+	avgTempArr = []
+	for (i=1; i< rowLength; i++){
+	    avgTempArr.push(oTable[0].rows[i].cells[1].innerHTML*1);
+	}
+	data.datasets[0].data.push(...avgTempArr);
+	
+	labelsArr = [];
+	for (i=1; i< rowLength; i++){
+	    labelsArr.push(oTable[0].rows[i].cells[0].innerHTML);
+	}
+	
+	
+	labels.push(...labelsArr );
+	avgTempChart.update();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Скрейпинг</h2>
+			<br>
+			<form action="#" th:action="@{/timeline/scraping}" th:method="post" class="w-50">
+				
+				<label for="validFrom" class="text-info font-weight-bold">От:</label>
+				<input type="month" id="validFrom" class="form-control" min="1999-01" name="from">
+				<br>
+			
+			 	<label for="validTo" class="text-info font-weight-bold">До:</label>
+				<input type="month" id="validTo" class="form-control" min="1999-01" name="to">
+				<br>
+	
+				<p>
+					<input type="submit" class="btn btn-info" value="Submit" />
+				</p>
+	
+			</form>
+
+		</section>
+
+
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

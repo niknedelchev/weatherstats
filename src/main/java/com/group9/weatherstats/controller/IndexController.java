@@ -38,6 +38,20 @@ public class IndexController {
 		userService.registerRegular(firstName, lastName, username, password);
 		return "redirect:/";
 	}
+	
+	@GetMapping(path = "register/admin")
+	public String showRegisterAdminPage() {
+		return "user/registration-admin";
+	}
+
+	@PostMapping(path = "register/admin")
+	public String registerAdmin(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String username,
+			@RequestParam String password) {
+
+		userService.registerAdmin(firstName, lastName, username, password);
+		return "redirect:/";
+	}
+
 
 	@GetMapping(path = "about")
 	public String showAboutPage() {

@@ -7,42 +7,116 @@
 <body>
 	<main>
 		<section class="container py-5 frame">
-					<h2 class="text-center text-info">Timeline</h2>
-					<br>
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Station name</th>
-								<th scope="col">Period</th>
-								<th scope="col">Average temperature</th>
-								<th scope="col">Average snow</th>
-								<th scope="col">Total rain</th>
-								<th scope="col">Total sunshine</th>
-								<th scope="col">Extreme max temperature</th>
-								<th scope="col">Extreme min temperature</th>
-								<th scope="col">Extreme avg temperature</th>
-								<th scope="col">Edit</th>
-								<th scope="col">Delete</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="timeline : ${timelines}">
-								<td th:text="${timeline.id}" ></td>
-								<td th:text="${timeline.station.name}" ></td>
-								<td th:text="${timeline.period.getMonth().getValue() +'-'+ timeline.period.getYear()}"></td>
-								<td th:text="${timeline.avgTemperature}"></td>
-								<td th:text="${timeline.avgSnow}"></td>
-								<td th:text="${timeline.totRain}"></td>
-								<td th:text="${timeline.totSunshine}"></td>
-								<td th:text="${timeline.extrMaxTemp}"></td>
-								<td th:text="${timeline.extrMinTemp}"></td>
-								<td th:text="${timeline.extrAvgTemp}"></td>
-								<td> <a class="btn btn-info btn-block" title="Edit" th:href="@{/timeline/edit/{id}(id=${timeline.id})}"> Edit </a></td>
- 								<td> <a class="btn btn-info btn-block" title="Delete" th:href="@{/timeline/delete/{id}(id=${timeline.id})}"> Delete </a></td>
-							</tr>
-						</tbody>
-					</table>
+			<div class="row">
+				<div class="col-md-1" sec:authorize="hasRole('ROLE_ADMIN')">
+					<a class="btn btn-info" title="Свали csv"
+						th:href="@{/timeline/add}">Добави</a>
+				</div>
+				<div class="col-md-1 ml-3" sec:authorize="hasRole('ROLE_ADMIN')">
+					<a class="btn btn-info" title="Зареди csv"
+						th:href="@{/timeline/upload-csv}">Зареди csv</a>
+				</div>
+				<div class="col-md-1 ml-3" sec:authorize="isAuthenticated()">
+					<a class="btn btn-info" title="Свали csv"
+						th:href="@{/timeline/download-csv}">Свали csv</a>
+				</div>
+				<div class="col-md-4 ml-3" sec:authorize="isAuthenticated()">
+					<form action="#" th:action="@{/timeline}" th:method="get">
+						<div class="form-row">
+							<div class="form-group col-md-1">
+								<label for="From">От</label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="month" class="form-control" id="From" name="from">
+							</div>
+							<div class="form-group col-md-1">
+								<label for="To">До</label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="month" class="form-control" id="To" name="to">
+							</div>
+							<div class="form-group col-md-4">
+								<input type="submit" class="btn btn-info" value="Филтрирай" />
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-4 ml-3" sec:authorize="isAuthenticated()">
+					<form action="#" th:action="@{/timeline/weighted-average}"
+						th:method="get">
+						<div class="form-row">
+							<div class="form-group col-md-1">
+								<label for="From">От</label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="month" class="form-control" id="From" name="from">
+							</div>
+							<div class="form-group col-md-1">
+								<label for="To">До</label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="month" class="form-control" id="To" name="to">
+							</div>
+							<div class="form-group col-md-4">
+								<input type="submit" class="btn btn-info" value="Изчисли средни" />
+							</div>
+
+						</div>
+					</form>
+				</div>
+	
+			</div>
+
+
+			<h2 class="text-center text-info">Времеви редове</h2>
+			<br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Станция</th>
+						<th scope="col">Период</th>
+						<th scope="col">Ср.темп.</th>
+						<th scope="col">Ср.снж. покр.</th>
+						<th scope="col">Общо к. дъжд</th>
+						<th scope="col">Общо слънцегреене</th>
+						<th scope="col">Екстр. макс. темп.</th>
+						<th scope="col">Екстр. мин. темп.</th>
+						<th scope="col">Екстр. ср. темп.</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')" scope="col">Редактирай</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')" scope="col">Изтрий</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="timeline : ${timelines}">
+						<td th:text="${timeline.id}"></td>
+						<td th:text="${timeline.station.name}"></td>
+						<td
+							th:text="${timeline.period.getMonth().getValue() +'-'+ timeline.period.getYear()}"></td>
+						<td th:text="${timeline.avgTemperature}"></td>
+						<td th:text="${timeline.avgSnow}"></td>
+						<td th:text="${timeline.totRain}"></td>
+						<td th:text="${timeline.totSunshine}"></td>
+						<td th:text="${timeline.extrMaxTemp}"></td>
+						<td th:text="${timeline.extrMinTemp}"></td>
+						<td th:text="${timeline.extrAvgTemp}"></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							class="btn btn-info btn-block" title="Edit"
+							th:href="@{/timeline/edit/{id}(id=${timeline.id})}">
+								Редактирай </a></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							class="btn btn-info btn-block" title="Delete"
+							th:href="@{/timeline/delete/{id}(id=${timeline.id})}"> Изтрий
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<a class="btn btn-danger" title="Изтрий всички"
+						th:href="@{/timeline/delete-all}">Изтрий всички</a>
+				</div>
+	
 		</section>
 
 
