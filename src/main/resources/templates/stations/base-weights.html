@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Stations - base weights</h2>
+			<br>
+			<p class="text-center text-danger text-uppercase font-weight-bold"
+				th:if="${error}" th:text="${error}" />
+
+			<form action="#" th:action="@{/stations/base-weights}"
+				th:method="post" class="w-50">
+				<div th:each="station : ${stations}" class="row">
+					<div class="col">
+						<label th:for="${station.name}" class="text-info font-weight-bold"
+							th:text="${station.name}" />
+					</div>
+					<div class="col">
+						<input type="text" th:id="${station.name}" class="form-control"
+							th:name="${station.id}" /> <br>
+					</div>
+				</div>
+				<p>
+					<input type="submit" class="btn btn-info" value="Submit" />
+				</p>
+
+			</form>
+		</section>
+
+
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

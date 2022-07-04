@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Timeline - weighted average</h2>
+			<br>
+			<h3 class="row">
+				<p class="col">From:</p>
+				<p class="col" th:text="${startDate}" />
+				<p class="col">To:</p>
+				<p class="col" th:text="${endDate}" />
+			</h3>
+			<br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Period</th>
+						<th scope="col">Average temperature</th>
+						<th scope="col">Average snow</th>
+						<th scope="col">Total rain</th>
+						<th scope="col">Total sunshine</th>
+						<th scope="col">Extreme max temperature</th>
+						<th scope="col">Extreme min temperature</th>
+						<th scope="col">Extreme avg temperature</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="timeline : ${timelines}">
+						<td
+							th:text="${timeline.period.getMonth().getValue() +'-'+ timeline.period.getYear()}"></td>
+						<td th:text="${timeline.avgTemperature}"></td>
+						<td th:text="${timeline.avgSnow}"></td>
+						<td th:text="${timeline.totRain}"></td>
+						<td th:text="${timeline.totSunshine}"></td>
+						<td th:text="${timeline.extrMaxTemp}"></td>
+						<td th:text="${timeline.extrMinTemp}"></td>
+						<td th:text="${timeline.extrAvgTemp}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

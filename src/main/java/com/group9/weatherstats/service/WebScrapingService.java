@@ -298,9 +298,12 @@ public class WebScrapingService {
         List<Station> stations = new ArrayList<>();
         
 
-        stations.add(stationService.findById(1));
-   //     stations.add(stationService.findById(2));
-
+ //       stations.add(stationService.findById(1));
+//        stations.add(stationService.findById(2));
+ //       stations.add(stationService.findById(3));
+        stations.add(stationService.findById(4));
+        stations.add(stationService.findById(5));
+// 
         List<Timeline> timelines = new ArrayList<>();
 
         for (int year = 2021; year <= 2022; year++){

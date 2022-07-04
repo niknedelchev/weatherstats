@@ -7,32 +7,39 @@
 <body>
 	<main>
 		<section class="container py-5 frame">
-					<h2 class="text-center text-info">Stations</h2>
-					<br>
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Name</th>
-								<th scope="col">Valid from</th>
-								<th scope="col">Valid to</th>
-								<th scope="col">Edit</th>
-								<th scope="col">Delete</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="station : ${stations}">
-								<td th:text="${station.id}"></th>
-								<td th:text="${station.name}"></td>
-								<td th:text="${station.validFrom.getMonth().getValue() +'-'+ station.validFrom.getYear()}"></td>
-								<td th:text="${station.validTo.getMonth().getValue()+ '-'+ station.validTo.getYear()}"></td>
-								<td> <a class="btn btn-info btn-block" title="Edit" th:href="@{/stations/edit/{id}(id=${station.id})}"> Edit </a></td>
- 								<td> <a class="btn btn-info btn-block" title="Delete" th:href="@{/stations/delete/{id}(id=${station.id})}"> Delete </a></td>
-							</tr>
-						</tbody>
-					</table>
+			<h2 class="text-center text-info">Stations</h2>
+			<br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Base weight</th>
+						<th scope="col">Valid from</th>
+						<th scope="col">Valid to</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="station : ${stations}">
+						<td th:text="${station.id}">
+						</th>
+						<td th:text="${station.name}"></td>
+						<td th:text="${station.baseWeight}"></td>
+						<td
+							th:text="${station.validFrom.getMonth().getValue() +'-'+ station.validFrom.getYear()}"></td>
+						<td
+							th:text="${station.validTo.getMonth().getValue()+ '-'+ station.validTo.getYear()}"></td>
+						<td><a class="btn btn-info btn-block" title="Edit"
+							th:href="@{/stations/edit/{id}(id=${station.id})}"> Edit </a></td>
+						<td><a class="btn btn-info btn-block" title="Delete"
+							th:href="@{/stations/delete/{id}(id=${station.id})}"> Delete
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
-
 
 	</main>
 	<th:block th:replace="fragments :: footer" />

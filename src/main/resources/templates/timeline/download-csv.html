@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<section class="container py-5 frame">
+			<h2 class="text-center text-info">Timelines CSV Downloader</h2>
+			<br> 
+			<a class="btn btn-outline-success mr-sm-2 my-2 my-sm-0"
+				title="csv downloader" th:href="@{/timeline/download-to-csv}">
+				Download csv</a>
+		</section>
+
+
+	</main>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
