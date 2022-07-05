@@ -89,7 +89,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="timeline : ${timelines}">
-						<td th:text="${timeline.id}"></td>
+						<td th:text="${timelineStat.index+1}"></td>
 						<td th:text="${timeline.station.name}"></td>
 						<td
 							th:text="${timeline.period.getMonth().getValue() +'-'+ timeline.period.getYear()}"></td>

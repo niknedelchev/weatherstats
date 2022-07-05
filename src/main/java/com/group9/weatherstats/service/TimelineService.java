@@ -161,15 +161,14 @@ public class TimelineService {
 		// get all unique periods
 		List<LocalDate> periods = timelines.stream().map(t -> t.getPeriod()).distinct().collect(Collectors.toList());
 
-		// get all unique stations in selected period
+		// get all unique stations in selected period 
 		List<Station> allStationsInPeriod = timelines.stream().map(t -> t.getStation()).distinct()
 				.collect(Collectors.toList());
-
-		Map<Station, Float> stationWeights = stationService.getRecalculatedWeightsByStations(allStationsInPeriod);
+		
+		Map<Station, Float> stationScaledWeights = stationService.getRecalculatedWeightsByStations(allStationsInPeriod);
 
 		List<TimelineWeightedAvgDTO> timelinesWAvgDTOs = new ArrayList<TimelineWeightedAvgDTO>();
-		int totalCountStations = allStationsInPeriod.size();
-
+		
 		for (LocalDate period : periods) {
 			float avgTemperature = 0;
 			float avgSnow = 0;
@@ -182,15 +181,15 @@ public class TimelineService {
 			for (Timeline timeline : timelines) {
 				if (timeline.getPeriod().equals(period)) {
 
-					float stationWeight = stationWeights.get(timeline.getStation());
+					float stationWeight = stationScaledWeights.get(timeline.getStation());
 
-					avgTemperature += (timeline.getAvgTemperature() * stationWeight) / totalCountStations;
-					avgSnow += (timeline.getAvgSnow() * stationWeight) / totalCountStations;
-					totRain += (timeline.getTotRain() * stationWeight) / totalCountStations;
-					totSunshine += (timeline.getTotSunshine() * stationWeight) / totalCountStations;
-					extrMaxTemp += (timeline.getExtrMaxTemp() * stationWeight) / totalCountStations;
-					extrMinTemp += (timeline.getExtrMinTemp() * stationWeight) / totalCountStations;
-					extrAvgTemp += (timeline.getExtrAvgTemp() * stationWeight) / totalCountStations;
+					avgTemperature += (timeline.getAvgTemperature() * stationWeight);
+					avgSnow += (timeline.getAvgSnow() * stationWeight);
+					totRain += (timeline.getTotRain() * stationWeight);
+					totSunshine += (timeline.getTotSunshine() * stationWeight);
+					extrMaxTemp += (timeline.getExtrMaxTemp() * stationWeight);
+					extrMinTemp += (timeline.getExtrMinTemp() * stationWeight);
+					extrAvgTemp += (timeline.getExtrAvgTemp() * stationWeight);
 				}
 
 			}
