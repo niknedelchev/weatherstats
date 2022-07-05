@@ -14,8 +14,8 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light"
 		th:fragment="navbar">
 
-		<a class="navbar-brand" title="начална страница" th:href="@{/}">
-			WSA </a>
+		<a class="navbar-brand text-info font-weight-bold" title="начална страница" th:href="@{/}">
+			<i>WSA</i> </a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarTogglerDemo02"
 			aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -65,7 +65,8 @@
 	<th:block th:fragment="footer">
 		<hr style="margin: 0px; background-color: #428BCA;">
 		<footer class="container-fluid bg-light" th:fragment="footer">
-			<div class="row">Wheather stats app</div>
+			<br>
+			<div class="row justify-content-center"><h5 class="text-info mt-5 ">Wheather stats app</h5></div>
 		</footer>
 
 		<script src="/js/jquery-3.6.0.min.js"></script>

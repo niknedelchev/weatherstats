@@ -1,22 +1,5 @@
-.index-services h2 {
-	text-align: center;
-} 
-
-.img-thumbnail{
-	width: 200px;
-    height: 200px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-
-
-.thumbnail{
-	width:200px;
-	margin:2px;
+section{
+	min-height:600px;
 }
 
 #about {
@@ -24,13 +7,9 @@
 	text-align: justify;
 }
 
-.about-img {
-	max-width:400px;	
-}
 
 .bg-light{
-	/*background-color: rgba(8, 185, 212, 0.1) !important;*/
-	background-color: rgba(12, 145, 166, 0.1) !important;
+	background-color: rgba(177, 212, 252, 0.25) !important;
 }
 
 a {
